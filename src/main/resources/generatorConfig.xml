@@ -3,8 +3,11 @@
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-    <!--<classPathEntry-->
-    <!--        location="C:\Users\DELL\.m2\repository\mysql\mysql-connector-java\8.0.27\mysql-connector-java-8.0.27.jar"/>-->
+    <!-- 引入配置文件 -->
+    <properties resource="application.properties"/>
+    <!--<classPathEntry
+            location="C:\Users\DELL\.m2\repository\mysql\mysql-connector-java\8.0.27\mysql-connector-java-8.0.27.jar"/>-->
+
     <!-- context 是逆向工程的主要配置信息 -->
     <!-- id：起个名字 -->
     <!-- targetRuntime：设置生成的文件适用于那个 mybatis 版本 -->
@@ -16,11 +19,11 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--jdbc的数据库连接 wg_insert 为数据库名字-->
-        <!--${spring.datasource.driver-class-name}-->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/springsecurity?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT%2B8"
-                        userId="root"
-                        password="123456"/>
+        <!--#jdbc:mysql://localhost:3306/springsecurity?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=GMT%2B8-->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}"/>
         <!--非必须，类型处理器，在数据库类型和java类型之间的转换控制-->
         <javaTypeResolver>
             <!-- 默认情况下数据库中的 decimal，bigInt 在 Java 对应是 sql 下的 BigDecimal 类 -->
