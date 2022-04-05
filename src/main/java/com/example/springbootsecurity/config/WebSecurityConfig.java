@@ -36,13 +36,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/r/r1").hasAuthority("p1")
                 .antMatchers("r/r2").hasAuthority("p2")
                 .antMatchers("/r/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+                .formLogin().//允许表单登录
+                loginPage("/login").//登录页面
+                loginProcessingUrl("/index")
                 .successForwardUrl("/login-success");
     }
 }
